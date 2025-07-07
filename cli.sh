@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 TARGETS="${WEBRTC_TARGETS:-arm arm64 x86 x64}"
-BUILD_ARGS="${WEBRTC_BUILD_ARGS:-symbol_level=1 debuggable_apks=false enable_libaom=false rtc_enable_protobuf=false rtc_include_dav1d_in_internal_decoder_factory=false}"
+BUILD_ARGS="${WEBRTC_BUILD_ARGS:-symbol_level=1 debuggable_apks=false enable_libaom=false rtc_enable_protobuf=false rtc_include_dav1d_in_internal_decoder_factory=false use_siso=false}"
 
 function print_usage {
     echo "Usage: $0 <command> [<args>]"
