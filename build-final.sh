@@ -32,7 +32,7 @@ docker run --rm -v "$(pwd)/out:/out" -v "$(pwd)/patches:/patches" \
 
     echo '==> Installing build dependencies'
     if [ -f build/install-build-deps.sh ]; then
-        ./build/install-build-deps.sh
+        sudo ./build/install-build-deps.sh --no-prompt
     else
         echo 'Warning: build/install-build-deps.sh not found, skipping dependency installation'
     fi
