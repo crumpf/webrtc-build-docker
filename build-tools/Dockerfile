@@ -9,6 +9,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     ca-certificates \
     ccache \
     curl \
+    file \
     git \
     python3 \
     python3-setuptools \
