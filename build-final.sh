@@ -24,14 +24,14 @@ docker run --rm -v "$(pwd)/out:/out" -v "$(pwd)/patches:/patches" \
     echo '==> Fetching sources'
     fetch --nohooks webrtc_android
 
+    echo '==> Change current working directory to src/ of the workspace'
+    cd src
+
     echo '==> Checking out revision $revision'
     git checkout $revision
 
     echo '==> Run gclient sync'
     gclient sync
-
-    echo '==> Change current working directory to src/ of the workspace'
-    cd src
 
     echo '==> Installing build dependencies'
     if [ -f build/install-build-deps.sh ]; then
