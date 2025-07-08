@@ -22,15 +22,24 @@ docker run --rm -v "$(pwd)/out:/out" -v "$(pwd)/patches:/patches" \
     export OUT='/out'
 
     echo '==> Fetching sources'
-    fetch webrtc_android
-    cd src
-
-    echo '==> Checking out revision $revision'
-    git checkout $revision
+    fetch --nohooks webrtc_android
 
     echo '==> Run gclient sync'
     gclient sync
 
+    echo '==> Change current working directory to src/ of the workspace'
+    cd src
+
+    echo '==> Installing build dependencies'
+    if [ -f build/install-build-deps.sh ]; then
+        ./build/install-build-deps.sh
+    else
+        echo 'Warning: build/install-build-deps.sh not found, skipping dependency installation'
+    fi
+
+    echo '==> Checking out revision $revision'
+    git checkout $revision
+    
     echo '==> Log revision and build args'
     git log --pretty=fuller HEAD...HEAD^ > \$OUT/revision.txt
     echo \"WEBRTC_COMPILE_ARGS: \$WEBRTC_COMPILE_ARGS\" >> \$OUT/build_args.txt
