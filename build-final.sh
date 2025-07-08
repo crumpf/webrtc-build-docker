@@ -20,20 +20,18 @@ docker run --rm -v "$(pwd)/out:/out" -v "$(pwd)/patches:/patches" \
 
     export WEBRTC_COMPILE_ARGS='$BUILD_ARGS'
     export OUT='/out'
-    export NINJA_EXECUTABLE=ninja
-    export USE_NINJA=1
 
     echo '==> Fetching sources'
     fetch --nohooks webrtc_android
-
-    echo '==> Change current working directory to src/ of the workspace'
-    cd src
 
     echo '==> Checking out revision $revision'
     git checkout $revision
 
     echo '==> Run gclient sync'
     gclient sync
+
+    echo '==> Change current working directory to src/ of the workspace'
+    cd src
 
     echo '==> Installing build dependencies'
     if [ -f build/install-build-deps.sh ]; then
@@ -51,7 +49,7 @@ docker run --rm -v "$(pwd)/out:/out" -v "$(pwd)/patches:/patches" \
     ls -noa --time-style=long-iso /patches/*.patch > \$OUT/patches.txt
 
     echo '==> Package AAR'
-    bash -c \"source build/android/envsetup.sh && NINJA_EXECUTABLE=ninja USE_NINJA=1 ./tools_webrtc/android/build_aar.py --output=\"\$OUT/libwebrtc.aar\"\"
+    bash -c \"source build/android/envsetup.sh && ./tools_webrtc/android/build_aar.py --output=\"\$OUT/libwebrtc.aar\"\"
 
     echo 'Done!'
 "
