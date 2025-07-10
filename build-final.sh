@@ -32,13 +32,6 @@ docker run --rm -v "$(pwd)/out:/out" -v "$(pwd)/patches:/patches" \
     echo '==> Run gclient sync'
     gclient sync
 
-    echo '==> Installing build dependencies'
-    if [ -f build/install-build-deps.sh ]; then
-        sudo ./build/install-build-deps.sh --no-prompt
-    else
-        echo 'Warning: build/install-build-deps.sh not found, skipping dependency installation'
-    fi
-
     echo '==> Log revision and build args'
     git log --pretty=fuller HEAD...HEAD^ > \$OUT/revision.txt
     echo \"WEBRTC_COMPILE_ARGS: \$WEBRTC_COMPILE_ARGS\" >> \$OUT/build_args.txt
