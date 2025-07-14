@@ -92,7 +92,7 @@ case ${1-} in
         docker run -v ${PWD}/webrtc:/webrtc threema/webrtc-build-tools:latest bash -c "
             set -euo pipefail
             echo 'Fetching source files'
-            fetch webrtc_android
+            fetch --nohooks webrtc_android
             echo 'Checking out revision $revision'
             cd src && git checkout $revision && cd -
             echo 'Updating third party repos and running pre-compile hooks'
