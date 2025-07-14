@@ -43,5 +43,7 @@ docker run --rm -v "$(pwd)/out:/out" -v "$(pwd)/patches:/patches" \
     echo '==> Package AAR'
     bash -c \"source build/android/envsetup.sh && ./tools_webrtc/android/build_aar.py --output=\"\$OUT/libwebrtc.aar\"\"
 
+    find ./out -print
+
     echo 'Done!'
 "
